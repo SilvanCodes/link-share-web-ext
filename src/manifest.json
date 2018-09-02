@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "LinkShare",
+  "version": "0.1",
+
+  "description": "Open links shared from mobile app!",
+
+  "icons": {
+    "48": "assets/icons/link-share-48.png"
+  },
+
+  "browser_action": {
+    "default_icon": "assets/icons/link-share-32.png",
+    "default_title": "LinkShare",
+    "default_popup": "/index.html"
+  },
+
+  "options_ui": {
+    "page": "/index.html?page=options"
+  },
+
+  "background": {
+    "page": "/index.html?page=background"
+  }
+}

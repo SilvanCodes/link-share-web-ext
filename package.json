@@ -1,13 +1,18 @@
 {
   "name": "link-share",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
+    "gqlgen": "gql-gen --schema http://localhost:4000 --template graphql-codegen-apollo-angular-template --out ./src/app/graphql/generated/graphql.ts \"./src/**/*.graphql\"",
+    "build": "ng build --aot",
+    "build:prod": "ng build --aot --prod --source-map=false --output-hashing=none",
+    "build:ext": "web-ext build --source-dir=dist/link-share --artifacts-dir=dist --overwrite-dest",
+    "build:zip": "npm run build:prod && npm run build:ext",
+    "test": "web-ext run --source-dir=dist/link-share --firefox=\"/usr/bin/firefox\"",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "run": "ng build --aot && cd dist/link-share/ && web-ext run"
   },
   "private": true,
   "dependencies": {
@@ -20,8 +25,17 @@
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
+    "apollo-angular": "^1.3.0",
+    "apollo-angular-link-http": "^1.2.0",
+    "apollo-cache-inmemory": "^1.2.0",
+    "apollo-client": "^2.4.0",
+    "apollo-link": "^1.2.0",
+    "apollo-link-ws": "^1.0.8",
     "core-js": "^2.5.4",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.9.2",
     "rxjs": "^6.0.0",
+    "subscriptions-transport-ws": "^0.9.14",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
@@ -29,10 +43,13 @@
     "@angular/cli": "~6.1.5",
     "@angular/compiler-cli": "^6.1.0",
     "@angular/language-service": "^6.1.0",
+    "@types/firefox-webext-browser": "^58.0.3",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
+    "graphql-code-generator": "^0.11.0",
+    "graphql-codegen-apollo-angular-template": "^0.11.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
@@ -43,7 +60,6 @@
     "protractor": "~5.4.0",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
-    "typescript": "~2.7.2",
-    "web-ext-types": "^2.1.0"
+    "typescript": "~2.9.0"
   }
 }

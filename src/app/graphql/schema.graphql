@@ -1,0 +1,14 @@
+query MyWebsites {
+  websites {
+    id
+    url
+  }
+}
+
+subscription NewWebsite {
+  newWebsite {
+    node {
+      url
+    }
+  }
+}
